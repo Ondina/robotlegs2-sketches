@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:common="yourdomain.common.views.components.*"
+					   xmlns:shell="yourdomain.shell.views.components.*"
+					   creationComplete="onCreationComplete()"
+					   preinitialize="onPreinitialize(event)">
+	<fx:Style source="assets/css/AirStyle.css"/>
+	<fx:Declarations>
+		<s:NumberFormatter id="numberFormatter"
+						   fractionalDigits="0"
+						   groupingSeparator="."/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+
+			import spark.components.Button;
+			import spark.components.Label;
+
+			import yourdomain.common.controllers.events.ApplicationInfoEvent;
+			import yourdomain.shell.context.ApplicationConfig;
+
+			/*============================================================================*/
+			/* StatusBar Buttons: Logout, Memory, GC                              			*/
+			/*============================================================================*/
+			[SkinPart(required="true")]
+			public var logoutButton:Button;
+
+			[SkinPart(required="true")]
+			public var memoryButton:Button;
+
+			[SkinPart(required="true")]
+			public var garbageButton:Button;
+
+			[SkinPart(required="true")]
+			public var memoryInfo:Label;
+
+			/*============================================================================*/
+			/* Robotlegs 2 Context Configuration                                            */
+			/*============================================================================*/
+			protected var applicationConfig:ApplicationConfig;
+
+			protected function onPreinitialize(event:FlexEvent):void
+			{
+				trace("onPreinitialize(event)");
+				applicationConfig=new ApplicationConfig(this);
+			}
+
+			/*============================================================================*/
+			/* Add Event Listeners                                                         */
+			/*============================================================================*/
+			protected function onCreationComplete():void
+			{
+				memoryButton.addEventListener(MouseEvent.CLICK, onShowMemoryUsage);
+				garbageButton.addEventListener(MouseEvent.CLICK, onGarbageCollection);
+				logoutButton.addEventListener(MouseEvent.CLICK, onLoggingOut);
+			}
+
+			/*============================================================================*/
+			/* Memory & GC                                                          		*/
+			/*============================================================================*/
+			protected function onShowMemoryUsage(event:MouseEvent=null):void
+			{
+				var totalMemory:Number=0;
+				totalMemory=System.totalMemory;
+				memoryInfo.text=numberFormatter.format(totalMemory / 1024) + " K";
+			}
+
+			protected function onGarbageCollection(event:MouseEvent):void
+			{
+				System.gc();
+				System.gc();
+			}
+
+			/*============================================================================*/
+			/* Logged In                                                   					*/
+			/*============================================================================*/
+			public function onLoggedIn(message:String):void
+			{
+				status="logged in as:" + message;
+				logoutButton.enabled=true;
+				cleanUp();
+			}
+
+			/*============================================================================*/
+			/* Logging Out                                                     				*/
+			/*============================================================================*/
+			protected function onLoggingOut(event:MouseEvent):void
+			{
+				dispatchEvent(new ApplicationInfoEvent(ApplicationInfoEvent.LOGGED_OUT));
+			}
+
+			/*============================================================================*/
+			/* Logged Out                                                     				*/
+			/*============================================================================*/
+			public function onLoggedOut():void
+			{
+				status="logged out";
+				logoutButton.enabled=false;
+				System.pauseForGCIfCollectionImminent(0.10);
+			}
+
+			/*============================================================================*/
+			/* Remove Event Listeners                                                      */
+			/*============================================================================*/
+			protected function cleanUp():void
+			{
+				removeEventListener(FlexEvent.PREINITIALIZE, onPreinitialize);
+				removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
+				System.pauseForGCIfCollectionImminent(0.01);
+			}
+		]]>
+	</fx:Script>
+	<!-- START VIEW -->
+	<shell:StartView id="startView"/>
+	<!-- ALERT VIEW-->
+	<common:AlertView id="alertMessagesContainer"
+					  horizontalCenter="0"/>
+</s:WindowedApplication>

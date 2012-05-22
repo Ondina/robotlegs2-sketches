@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 minWidth="300"
+		 minHeight="300"
+		 title="Message"
+		 dropShadowVisible="true"
+		 visible="false"
+		 creationComplete="initView()">
+	<fx:Script>
+		<![CDATA[
+			public function initView():void
+			{
+				addEventListener(MouseEvent.CLICK, closeAlertView);
+				closeAlertButton.addEventListener(MouseEvent.CLICK, closeAlertView);
+			}
+
+			public function closeAlertView(event:MouseEvent=null):void
+			{
+				alertMessagesText.text="";
+				visible=false;
+			}
+
+			public function openAlertView(message:String, styleType:String):void
+			{
+				alertMessagesText.text="";
+				visible=true;
+				styleName=styleType + "Panel";
+				alertMessagesText.styleName=styleType + "Text";
+				alertMessagesText.text=message;
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:RichText id="alertMessagesText"
+				maxWidth="600"
+				paddingBottom="30"
+				paddingLeft="10"
+				paddingRight="10"
+				paddingTop="10"
+				backgroundColor="#FFFFFF"
+				fontSize="13"
+				fontWeight="bold"
+				horizontalCenter="0"
+				verticalAlign="middle"
+				verticalCenter="0"/>
+	<s:Button label="X"
+			  id="closeAlertButton"
+			  toolTip="close window"
+			  fontWeight="bold"
+			  fontSize="12"
+			  color="#0B333C"
+			  right="0"
+			  bottom="0"/>
+</s:Panel>

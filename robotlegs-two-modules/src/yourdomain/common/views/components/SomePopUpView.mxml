@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   dropShadowVisible="false"
+			   close="onCloseWindow(event)"
+			   creationComplete="onCreationComplete()"
+			   windowMoving="onMoveWindow(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+
+			import spark.events.TitleWindowBoundsEvent;
+
+			import yourdomain.common.controllers.events.SomePopUpEvent;
+
+			private function onCreationComplete():void
+			{
+				addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onCloseWindow);
+			}
+
+			/*============================================================================*/
+			/* Close popup                             			*/
+			/*============================================================================*/
+			public function onCloseWindow(event:Event=null):void
+			{
+				removeEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onCloseWindow);
+				if (event)
+					dispatchEvent(new SomePopUpEvent(SomePopUpEvent.POPUP_CLOSED));
+				PopUpManager.removePopUp(this);
+				System.pauseForGCIfCollectionImminent(0.05);
+			}
+
+			/*============================================================================*/
+			/* Keep the window on stage                              			*/
+			/*============================================================================*/
+			protected function onMoveWindow(event:TitleWindowBoundsEvent):void
+			{
+				if (event.afterBounds.left < 0)
+				{
+					event.afterBounds.left=0;
+				}
+				else if (event.afterBounds.right > systemManager.stage.stageWidth)
+				{
+					event.afterBounds.left=systemManager.stage.stageWidth - event.afterBounds.width;
+				}
+				if (event.afterBounds.top < 0)
+				{
+					event.afterBounds.top=0;
+				}
+				else if (event.afterBounds.bottom > systemManager.stage.stageHeight)
+				{
+					event.afterBounds.top=systemManager.stage.stageHeight - event.afterBounds.height;
+				}
+			}
+		]]>
+	</fx:Script>
+</s:TitleWindow>

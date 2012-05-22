@@ -1,0 +1,126 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+global
+{
+	color: 				#150208;
+	fontFamily:			Verdana;
+	fontSize: 			11;
+	rollOverColor: 		#E6E6F5;
+	symbolColor: 		#A442AE;
+	focusColor: 		#B2DC32;
+	selectionColor: 	#C8E965;
+	textSelectedColor: 	#88a336;
+	accent-color: 		#F44AF0;
+	content-background-color: #FFFFFF;
+	baseColor:			#96b732;
+	themeColor: 		#B2DC32;
+	chrome-color: 		#C5C3BB;
+}
+
+s|WindowedApplication
+{
+	skinClass:ClassReference("assets.skins.SparkWindowedApplicationSkin");
+}
+s|BorderContainer{
+	cornerRadius:6;
+	borderColor: 		#8FAE42;
+	backgroundColor: 	#FFFFFF;
+}
+
+s|Button{
+	skinClass:ClassReference("assets.skins.SkinButton");	
+}
+.boldButton{	
+	color:#00FF00;
+}
+
+.buttonBarFirst {
+	skinClass:ClassReference("assets.skins.SkinBarButton");	
+}
+.buttonBarFirst s|ButtonBarButton{
+	height:26;
+	width:222;
+	color1: #DFE9A8;
+	color2: #8FAE42;
+	color3: #9FA0A1;
+	radiusX:5;
+	radiusY:5;
+}
+s|DropDownList{	
+	cornerRadius:4;
+	dropShadowVisible: false;	
+	
+	fontSize: 11;
+	alternatingItemColors: #FFFFFF, #F4F7F0;
+	textRollOverColor: #4E4E4F;
+	selectionColor: #CCE199;
+	rollOverColor: #B2DC32;	
+	skinClass:ClassReference("assets.skins.SparkDropListSkin");	
+}
+s|DropDownList #labelDisplay{	
+	fontSize: 11;
+}
+s|Panel{
+	skinClass:ClassReference("assets.skins.SparkPanelSkin");
+	cornerRadius:9;
+	borderColor:#739a13;
+	rightColor1:#ffffff;
+	rightColor2:#c5c3bb;
+	leftColor1:#DADAE6;
+	leftColor2:#BCBCD2;
+	leftColor3:#D1D1D2;	
+}
+.alertPanel{
+	cornerRadius:9;
+	borderColor:#739a13;
+	rightColor1:#ffffff;
+	rightColor2:#AA453D;
+	leftColor1:#AA453D;
+	leftColor2:#AA453D;	
+	leftColor3:#AA453D;	
+	skinClass:ClassReference("assets.skins.SparkPanelSkin");
+}
+.infoPanel{	
+	cornerRadius:9;
+	borderColor:#739a13;
+	rightColor1:#ffffff;
+	rightColor2:#c5c3bb;
+	leftColor1:#aec825;
+	leftColor2:#91b11c;
+	leftColor3:#739a13;	
+	skinClass:ClassReference("assets.skins.SparkPanelSkin");
+}
+.alertText{
+	color:#AA453D;
+}
+.infoText{
+	color:#546711;
+}
+s|TextArea{
+	borderColor:#CCCCCC;
+}
+s|VScrollBar{
+	chrome-color: #F6F9F0;
+}
+s|VScrollBar #thumb{
+	chrome-color: #739a13;
+}
+s|HScrollBar{
+	chrome-color: #F0F4F7;
+}
+s|TitleWindow{	
+	chrome-color: #D5D4D8;
+	accent-color: #963B6B;
+	cornerRadius:9;
+	contentBackgroundColor: #ffffff;
+	borderColor: #739A13;	
+}
+mx|ToolTip {
+	backgroundColor: #739A13;	
+	backgroundAlpha: 0.9;
+	color: #494c54;
+	color: white;
+	fontSize: 12;
+	fontWeight: bold;
+}

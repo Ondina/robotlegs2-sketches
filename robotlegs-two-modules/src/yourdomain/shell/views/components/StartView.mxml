@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:shell="yourdomain.shell.views.components.*"
+		 width="100%"
+		 height="100%">
+	<fx:Script>
+		<![CDATA[
+			import spark.modules.ModuleLoader;
+
+			protected var moduleLoader:ModuleLoader;
+
+			//just for debugging & profiling purposes: if set to true it does what it says, it skips the login view ;)
+			protected var skipLogin:Boolean=false;
+
+			/*============================================================================*/
+			/* change states                                                			*/
+			/*============================================================================*/
+			public function initView():void
+			{
+				if (skipLogin)
+				{
+					currentState="main";
+				}
+				else
+				{
+					currentState="login";
+					onLoadModule();
+				}
+			}
+
+			/*============================================================================*/
+			/* Load Login Module                                                			*/
+			/*============================================================================*/
+			public function onLoadModule():void
+			{
+				moduleLoader=new ModuleLoader();
+				moduleLoader.url="yourdomain/modules/loginModule/views/components/LoginView.swf";
+				loaderContainer.addElement(moduleLoader);
+
+				moduleLoader.horizontalCenter=0;
+				moduleLoader.verticalCenter=0;
+			}
+
+			/*============================================================================*/
+			/* Unload Login Module                                                			*/
+			/*============================================================================*/
+			protected function onUnloadModule(event:MouseEvent=null):void
+			{
+
+				if (moduleLoader)
+				{
+					moduleLoader.child=null;
+					moduleLoader.unloadModule();
+					loaderContainer.removeElement(moduleLoader);
+					moduleLoader=null;
+					System.pauseForGCIfCollectionImminent(0.05);
+				}
+			}
+
+			/*============================================================================*/
+			/* Logged In                                                   					*/
+			/*============================================================================*/
+			public function onLoggedIn(message:String):void
+			{
+				onUnloadModule();
+				currentState="main";
+			}
+
+			/*============================================================================*/
+			/* Logged Out                                                     				*/
+			/*============================================================================*/
+			public function onLoggedOut():void
+			{
+				currentState="login";
+				System.pauseForGCIfCollectionImminent(0.10);
+				onLoadModule();
+			}
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="start"/>
+		<s:State name="login"/>
+		<s:State name="main"/>
+	</s:states>
+	<s:Group id="loaderContainer"
+			 horizontalCenter="0"
+			 y="250"
+			 includeIn="login"/>
+	<shell:MainNavigationView id="mainNavigator"
+							  includeIn="main"
+							  x="0"
+							  y="0"/>
+	<s:Label id="startInfo"
+			 includeIn="start"
+			 horizontalCenter="0"
+			 text="Context or database configuration failed."
+			 verticalCenter="0"/>
+</s:Group>

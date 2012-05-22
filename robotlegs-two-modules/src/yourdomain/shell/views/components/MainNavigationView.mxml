@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:shell="yourdomain.shell.views.components.*"
+		 width="100%"
+		 height="100%">
+	<fx:Script>
+		<![CDATA[
+			import spark.events.IndexChangeEvent;
+			
+			import yourdomain.common.controllers.events.ApplicationInfoEvent;
+			
+			protected var currentIndex:int;
+			protected var oldIndex:int;			
+			protected var oldView:String="";
+
+			public function initView():void
+			{
+				buttonBar.addEventListener(IndexChangeEvent.CHANGE, onStackIndexChanged);
+				oldIndex=currentIndex=buttonBar.selectedIndex=0;
+			}
+
+			protected function onStackIndexChanged(event:IndexChangeEvent):void
+			{
+				//trace("MainNavigationView.onStackIndexChanged(event)");
+				/* trace("newIndex " + event.newIndex);
+				trace("oldIndex " + event.oldIndex);
+				trace("selectedIndex " + buttonBar.selectedIndex); */
+				//clicking on the current selected tab sets event.oldIndex,event.newIndex,selectedIndex to -1, depending on the number of clicks
+				//workaround to avoid -1 indexes:
+				if (buttonBar.selectedIndex != -1)
+				{
+					currentIndex=buttonBar.selectedIndex;
+					oldView=mainViewStack.getChildAt(oldIndex).name;
+					//trace("oldIndex " + oldIndex + " currentIndex " + currentIndex);
+					if (oldIndex != currentIndex)
+						dispatchEvent(new ApplicationInfoEvent(ApplicationInfoEvent.NAVIGATE_FROM, oldView));
+					oldIndex=currentIndex;
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<mx:ViewStack id="mainViewStack"
+				  x="10"
+				  y="30"
+				  width="100%"
+				  height="100%">
+		<s:NavigatorContent width="100%"
+							height="100%"
+							label="Modules"
+							name="chatMasterView">
+			<shell:ChatMasterView/>
+		</s:NavigatorContent>
+		<s:NavigatorContent width="100%"
+							height="100%"
+							label="Popups"
+							name="popupsMasterView">
+			<shell:PopupsMasterView/>
+		</s:NavigatorContent>
+	</mx:ViewStack>
+	<s:ButtonBar id="buttonBar"
+				 dataProvider="{mainViewStack}"
+				 selectedIndex="0"
+				 x="0"
+				 styleName="buttonBarFirst">
+		<s:layout>
+			<s:HorizontalLayout gap="1"/>
+		</s:layout>
+	</s:ButtonBar>
+</s:Group>

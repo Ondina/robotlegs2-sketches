@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Module xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  creationComplete="onCreationComplete(event)"
+		  addedToStage="onAddedToStage(event);"
+		  removedFromStage="onRemoveFromStage(event);">
+	<fx:Declarations>
+		<mx:Validator id="userNameValidator"
+					  required="true"
+					  source="{userName}"
+					  property="text"/>
+		<mx:Validator id="userPasswordValidator"
+					  required="true"
+					  source="{userPassword}"
+					  property="text"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import yourdomain.modules.loginModule.context.LoginModuleConfig;
+			import yourdomain.modules.loginModule.controllers.events.LoginEvent;
+			import yourdomain.modules.loginModule.models.LoginVO;
+			
+			protected var context:LoginModuleConfig;
+			protected var loginVO:LoginVO;
+			protected var validators:Array;
+
+			/*============================================================================*/
+			/* Robotlegs 2 Context Configuration                                            */
+			/*============================================================================*/
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				validators=[userNameValidator, userPasswordValidator];
+				userName.setFocus();
+				
+				removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
+				addListeners();
+				
+				context=new LoginModuleConfig(this);
+			}
+
+			protected function addListeners():void
+			{
+				loginButton.addEventListener(MouseEvent.CLICK, validateForm);
+				userPassword.addEventListener(MouseEvent.DOUBLE_CLICK, onResetInput);
+				userName.addEventListener(MouseEvent.DOUBLE_CLICK, onResetInput);
+			}
+
+			protected function onAddedToStage(event:Event):void
+			{
+				addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			}
+
+			override protected function keyDownHandler(event:KeyboardEvent):void
+			{
+				super.keyDownHandler(event);
+				if (event.keyCode == Keyboard.ENTER)
+					validateForm();
+			}
+			/*============================================================================*/
+			/* Validation                                       							 */
+			/*============================================================================*/
+			protected function validateForm(event:MouseEvent=null):void
+			{
+				if (Validator.validateAll(validators).length > 0)
+					return;
+				performLogin();
+			}
+			/*============================================================================*/
+			/* Login                                        							 */
+			/*============================================================================*/
+			protected function performLogin():void
+			{
+				loginVO=new LoginVO();
+				loginVO.user_name=userName.text;
+				loginVO.user_password=userPassword.text;
+				dispatchEvent(new LoginEvent(LoginEvent.LOG_IN_LOCALLY, loginVO));
+			}
+			/*============================================================================*/
+			/* Clean up                                         							 */
+			/*============================================================================*/
+			protected function onRemoveFromStage(event:Event):void
+			{
+				removeListeners();
+				userName.text="";
+				userPassword.text="";
+			}
+
+			protected function removeListeners():void
+			{
+				removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+				removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStage);
+				loginButton.removeEventListener(MouseEvent.CLICK, validateForm);
+				userPassword.removeEventListener(MouseEvent.DOUBLE_CLICK, onResetInput);
+				userName.removeEventListener(MouseEvent.DOUBLE_CLICK, onResetInput);
+			}
+
+			protected function onResetInput(event:MouseEvent):void
+			{
+				event.currentTarget.text="";
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<s:Panel x="0"
+			 y="0"
+			 title="Login"
+			 width="200"
+			 height="175">
+		<mx:Label x="10"
+				  y="28"
+				  text="username"/>
+		<s:TextInput x="92"
+					 y="27.5"
+					 id="userName"
+					 text="rl"
+					 width="90"
+					 doubleClickEnabled="true"/>
+		<mx:Label x="10"
+				  y="65"
+				  text="password"/>
+		<s:TextInput x="92"
+					 y="64.5"
+					 id="userPassword"
+					 text="rl"
+					 displayAsPassword="true"
+					 doubleClickEnabled="true"
+					 width="90"/>
+		<s:Button y="106"
+				  label="Login"
+				  id="loginButton"
+				  x="123"/>
+	</s:Panel>
+</s:Module>
