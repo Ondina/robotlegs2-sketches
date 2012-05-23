@@ -16,8 +16,11 @@
 		<![CDATA[
 			//============================================================================
 			// compiler arguments when linking against the rl source:
-			//-keep-as3-metadata+=Inject
-			//-keep-as3-metadata+=PostConstruct
+			// -keep-as3-metadata+=Inject
+			// -keep-as3-metadata+=PostConstruct
+			// don't forget to add the modules-go to Project::Properties::FlexModules::Add:
+			// src\yourdomain\modules\chatModule\views\components\ChatView.mxml
+			// src\yourdomain\modules\loginModule\views\components\LoginView.mxml
 			//============================================================================
 
 			import mx.events.FlexEvent;
