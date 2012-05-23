@@ -11,7 +11,7 @@
 			import yourdomain.common.controllers.events.SomePopUpEvent;
 			import yourdomain.modules.popupStuff.controllers.events.SomeEvent;
 			import yourdomain.modules.popupStuff.models.SomeVO;
-			
+
 			/**
 			 *
 			 * @author Ondina D. F.

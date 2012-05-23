@@ -16,7 +16,7 @@
 			import yourdomain.common.controllers.events.InterModularEvent;
 			import yourdomain.common.models.vo.ModulesVO;
 			import yourdomain.modules.chatModule.context.ChatConfig;
-			
+
 			/**
 			 *
 			 * @author Ondina D. F.

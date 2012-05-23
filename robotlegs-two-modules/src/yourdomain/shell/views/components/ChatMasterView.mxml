@@ -20,7 +20,7 @@
 			import yourdomain.common.controllers.interfaces.IModules;
 			import yourdomain.common.models.vo.ModulesVO;
 			import yourdomain.modules.chatModule.models.vos.ChatEnum;
-			
+
 			/**
 			 *
 			 * @author Ondina D. F.
