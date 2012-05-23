@@ -4,7 +4,11 @@ package yourdomain.shell.views.mediators
 	
 	import yourdomain.common.controllers.events.ApplicationInfoEvent;
 	import yourdomain.shell.views.components.MainNavigationView;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class MainNavigationMediator extends Mediator
 	{
 		[Inject]

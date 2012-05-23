@@ -6,7 +6,11 @@ package yourdomain.common.views.mediators
 	
 	import yourdomain.common.controllers.events.AlertEvent;
 	import yourdomain.common.views.components.AlertView;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class AlertMediator extends Mediator
 	{
 		[Inject]

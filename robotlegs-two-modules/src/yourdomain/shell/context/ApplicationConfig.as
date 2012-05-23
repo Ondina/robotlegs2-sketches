@@ -20,6 +20,10 @@ package yourdomain.shell.context
 	import yourdomain.shell.controllers.commands.mappings.MapViewsCommand;
 	import yourdomain.shell.controllers.events.ApplicationConfigEvent;
 
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ApplicationConfig
 	{
 		private var localDispatcher:IEventDispatcher;
@@ -97,7 +101,7 @@ package yourdomain.shell.context
 			commandMap.unmap(ApplicationConfigEvent.START_MAPPING, ApplicationConfigEvent);
 			commandMap.unmap(ApplicationConfigEvent.CONFIGURE_SERVICES, ApplicationConfigEvent);
 			commandMap.unmap(ApplicationConfigEvent.CONFIGURE_DATABASE, ApplicationConfigEvent);
-			
+
 			_contextView.removeEventListener(FlexEvent.APPLICATION_COMPLETE, onApplicationComplete);
 			trace("<==============================================================shell done]");
 			localDispatcher.dispatchEvent(new ApplicationConfigEvent(ApplicationConfigEvent.CONFIGURATION_COMPLETE));

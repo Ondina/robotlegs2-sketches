@@ -2,7 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 removedFromStage="onRemoveFromStage(event);"
+		 removedFromStage="onRemovedFromStage(event);"
 		 name="popupsMasterView">
 	<fx:Script>
 		<![CDATA[
@@ -11,7 +11,11 @@
 			import yourdomain.common.controllers.events.SomePopUpEvent;
 			import yourdomain.modules.popupStuff.controllers.events.SomeEvent;
 			import yourdomain.modules.popupStuff.models.SomeVO;
-
+			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */
 			public var openedPopups:Array;
 			protected var popupCounter:int;
 
@@ -23,9 +27,9 @@
 				sendMessageButton.addEventListener(MouseEvent.CLICK, onDataPong);
 			}
 
-			/*============================================================================*/
-			/* open popup window
-			/*============================================================================*/
+			//============================================================================
+			// Open popup window
+			//============================================================================
 			protected function onOpenPopup(event:MouseEvent):void
 			{
 				var popupTitle:String="Some Popup " + popupCounter;
@@ -34,17 +38,17 @@
 				dispatchEvent(new SomePopUpEvent(SomePopUpEvent.OPEN_POPUP, this, popupTitle));
 			}
 
-			/*============================================================================*/
-			/* Message received from popup
-			/*============================================================================*/
+			//============================================================================
+			// Message received from popup
+			//============================================================================
 			public function onDataPing(someVO:SomeVO):void
 			{
 				receivedMessage.text="User name: " + someVO.user_name + "\r\nUser pw: I now it, but I won't tell you ;)";
 			}
 
-			/*============================================================================*/
-			/* Send message to popup
-			/*============================================================================*/
+			//============================================================================
+			// Send message to popup
+			//============================================================================
 			protected function onDataPong(event:MouseEvent):void
 			{
 				if (messageToSend.text == "")
@@ -54,11 +58,11 @@
 				dispatchEvent(new SomeEvent(SomeEvent.DATA_PONG, someVO));
 			}
 
-			/*============================================================================*/
-			/* Clean up
-			/*============================================================================*/
+			//============================================================================
+			// Clean up
+			//============================================================================
 			public function onPopupClosed(popupTitle:String):void
-			{				
+			{
 				var popIndex:int=openedPopups.indexOf(popupTitle);
 				openedPopups.splice(popIndex, 1);
 				resetInputs();
@@ -69,13 +73,14 @@
 				event.currentTarget.text="";
 			}
 
-			protected function onRemoveFromStage(event:Event):void
+			protected function onRemovedFromStage(event:Event):void
 			{
+				popupCounter=1;
 				openedPopups=[];
 				removeListeners();
 				resetInputs();
 			}
-			
+
 			public function resetInputs():void
 			{
 				receivedMessage.text="";

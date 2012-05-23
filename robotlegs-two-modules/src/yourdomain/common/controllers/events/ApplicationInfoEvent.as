@@ -1,7 +1,11 @@
 package yourdomain.common.controllers.events
 {
 	import flash.events.Event;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ApplicationInfoEvent extends Event
 	{
 		//EXIT APP not used yet

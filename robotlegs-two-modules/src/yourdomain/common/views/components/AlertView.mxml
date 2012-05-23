@@ -10,6 +10,11 @@
 		 creationComplete="initView()">
 	<fx:Script>
 		<![CDATA[
+			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */
 			public function initView():void
 			{
 				addEventListener(MouseEvent.CLICK, closeAlertView);

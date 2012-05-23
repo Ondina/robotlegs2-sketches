@@ -1,7 +1,11 @@
 package yourdomain.common.models.vo
 {
 	import yourdomain.modules.chatModule.models.vos.ChatEnum;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ModulesVO
 	{
 		private var _moduleColor:String;

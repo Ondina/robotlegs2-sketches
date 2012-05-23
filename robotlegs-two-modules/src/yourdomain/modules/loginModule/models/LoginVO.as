@@ -1,6 +1,9 @@
 package yourdomain.modules.loginModule.models
 {
-
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class LoginVO
 	{
 		private var _user_id:String;

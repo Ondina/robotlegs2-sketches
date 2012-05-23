@@ -1,5 +1,10 @@
 package yourdomain.modules.popupStuff.models
 {
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */	
 	public class SomeVO
 	{
 		private var _user_id:String;

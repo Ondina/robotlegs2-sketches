@@ -1,7 +1,11 @@
 package yourdomain.common.controllers.events
 {
 	import flash.events.Event;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class AlertEvent extends Event
 	{
 		public static const INFO_ALERT:String="infoAlerts";

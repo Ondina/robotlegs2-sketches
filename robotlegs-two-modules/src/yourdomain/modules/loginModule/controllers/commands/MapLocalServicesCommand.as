@@ -23,7 +23,6 @@ package yourdomain.modules.loginModule.controllers.commands
 
 		protected function configureSQLService():void
 		{
-			trace("MapLocalServicesCommand.configureSQLService() " + File.applicationDirectory.name);
 			var dbFile:File=File.applicationDirectory.resolvePath(DB_FILE_NAME);
 			var sqlRunner:SQLRunner=new SQLRunner(dbFile);
 

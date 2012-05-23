@@ -18,7 +18,11 @@ package yourdomain.modules.loginModule.context
 	import yourdomain.modules.loginModule.models.LoginVO;
 	import yourdomain.modules.loginModule.views.components.LoginView;
 	import yourdomain.modules.loginModule.views.mediators.LoginMediator;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class LoginModuleConfig
 	{
 		private var injector:Injector;
@@ -32,7 +36,7 @@ package yourdomain.modules.loginModule.context
 		public function LoginModuleConfig(contextView:DisplayObjectContainer):void
 		{
 			trace("[login start==============================================================>");
-			trace("1. LoginModuleConfig.LoginModuleConfig(contextView) " + contextView);
+			trace("1. LoginModuleConfig.LoginModuleConfig(contextView) ");
 			_childContextView=contextView;
 			startConfiguration();
 		}

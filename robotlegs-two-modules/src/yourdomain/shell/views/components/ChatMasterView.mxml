@@ -2,31 +2,36 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 removedFromStage="onRemoveFromStage(event);"
+		 removedFromStage="onRemovedFromStage(event);"
 		 width="100%"
-		 height="100%" name="chatMasterView">
+		 height="100%"
+		 name="chatMasterView">
 	<fx:Script>
 		<![CDATA[
 			import mx.core.IVisualElement;
 			import mx.events.ModuleEvent;
-			
+
 			import spark.components.RichText;
 			import spark.layouts.VerticalLayout;
 			import spark.modules.ModuleLoader;
-			
+
 			import yourdomain.common.controllers.events.AlertEvent;
 			import yourdomain.common.controllers.events.InterModularEvent;
 			import yourdomain.common.controllers.interfaces.IModules;
 			import yourdomain.common.models.vo.ModulesVO;
 			import yourdomain.modules.chatModule.models.vos.ChatEnum;
-
+			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */
 			protected var moduleLoader:ModuleLoader;
 			protected var moudulesCounter:int=1;
 			protected var currentModuleLoader:Dictionary=new Dictionary();
 
-			/*============================================================================*/
-			/* Init
-			/*============================================================================*/
+			//============================================================================
+			// Init
+			//============================================================================
 			public function initView():void
 			{
 				addListeners();
@@ -40,9 +45,9 @@
 				toModulesButton.addEventListener(MouseEvent.CLICK, onSendMessage);
 			}
 
-			/*============================================================================*/
-			/* Load  Module
-			/*============================================================================*/
+			//============================================================================
+			// Load  Module
+			//============================================================================
 			public function onLoadModule(event:MouseEvent=null):void
 			{
 				if (channelChooser.selectedIndex == -1)
@@ -63,9 +68,9 @@
 				loaderContainer.addElement(moduleLoader);
 			}
 
-			/*============================================================================*/
-			/* Module   Loaded
-			/*============================================================================*/
+			//============================================================================
+			// Module   Loaded
+			//============================================================================
 			protected function onModuleReady(event:ModuleEvent):void
 			{
 				var iModule:*=event.currentTarget.child as IModules;
@@ -80,18 +85,18 @@
 				moudulesCounter++;
 			}
 
-			/*============================================================================*/
-			/* Module   Error
-			/*============================================================================*/
+			//============================================================================
+			// Module   Error
+			//============================================================================
 			protected function onModuleError(event:ModuleEvent):void
 			{
 				dispatchEvent(new AlertEvent(AlertEvent.ERROR_ALERT, event.errorText));
 				event.currentTarget.removeEventListener(ModuleEvent.ERROR, onModuleError);
 			}
 
-			/*============================================================================*/
-			/* Unload  One Module
-			/*============================================================================*/
+			//============================================================================
+			// Unload  One Module
+			//============================================================================
 			public function onUnloadModule(modVO:ModulesVO):void
 			{
 				var moduleName:String=modVO.moduleName;
@@ -100,9 +105,9 @@
 				delete currentModuleLoader[moduleName];
 			}
 
-			/*============================================================================*/
-			/* Unload  All Modules
-			/*============================================================================*/
+			//============================================================================
+			// Unload  All Modules
+			//============================================================================
 			protected function onUnloadAllModules(event:MouseEvent=null):void
 			{
 				resetInputs();
@@ -112,12 +117,13 @@
 					delete currentModuleLoader[moduleName];
 				}
 				loaderContainer.removeAllElements();
+				moudulesCounter=1;
 				System.pauseForGCIfCollectionImminent(0.05);
 			}
 
-			/*============================================================================*/
-			/* Send Message to Modules
-			/*============================================================================*/
+			//============================================================================
+			// Send Message to Modules
+			//============================================================================
 			protected function onSendMessage(event:MouseEvent):void
 			{
 				if (messageToSend.text == "")
@@ -129,9 +135,9 @@
 				dispatchEvent(new InterModularEvent(InterModularEvent.SHELL_TO_MODULE, modulesVO));
 			}
 
-			/*============================================================================*/
-			/* Message from Modules
-			/*============================================================================*/
+			//============================================================================
+			// Message from Modules
+			//============================================================================
 			public function onMessageReceived(modVO:ModulesVO):void
 			{
 				var color:String=modVO.channelsColor;
@@ -145,9 +151,9 @@
 				scrollingContent(index);
 			}
 
-			/*============================================================================*/
-			/* Scroll received messages content
-			/*============================================================================*/
+			//============================================================================
+			// Scroll received messages content
+			//============================================================================
 			protected function scrollingContent(index:Number):void
 			{
 				var verticalLayout:VerticalLayout=receivedMessage.layout as VerticalLayout;
@@ -156,9 +162,9 @@
 				receivedMessage.verticalScrollPosition=verticalLayout.verticalScrollPosition;
 			}
 
-			/*============================================================================*/
-			/* Clean up
-			/*============================================================================*/
+			//============================================================================
+			// Clean up
+			//============================================================================
 			protected function resetInputs():void
 			{
 				channelChooser.selectedIndex=-1;
@@ -171,7 +177,7 @@
 				event.currentTarget.text="";
 			}
 
-			protected function onRemoveFromStage(event:Event):void
+			protected function onRemovedFromStage(event:Event):void
 			{
 				onUnloadAllModules();
 				removeListeners();
@@ -191,10 +197,10 @@
 	</s:layout>
 	<s:BorderContainer x="10"
 					   y="10"
-					   width="535">
+					   width="526">
 		<s:HGroup x="10"
 				  y="4"
-				  gap="25"
+				  gap="23"
 				  verticalAlign="middle">
 			<s:Label id="moduleId"
 					 text="Shell"/>
@@ -213,11 +219,11 @@
 		<s:TextArea id="messageToSend"
 					x="243"
 					y="51"
-					width="280"
+					width="274"
 					height="67"
 					doubleClickEnabled="true"/>
 		<s:Button id="toModulesButton"
-				  x="394"
+				  x="386"
 				  y="136"
 				  label="send to modules"/>
 		<s:BorderContainer x="10"

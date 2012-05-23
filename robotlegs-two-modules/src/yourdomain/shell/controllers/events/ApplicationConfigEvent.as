@@ -14,12 +14,12 @@ package yourdomain.shell.controllers.events
 
 		public static const CONFIGURE_SERVICES:String="configureServices";
 		public static const CONFIGURE_DATABASE:String="configureDatabase";
-		
+
 		public static const CONFIGURE_DATABASE_COMPLETE:String="configureDatabaseComplete";
-		public static const CONFIGURE_SERVICES_COMPLETE:String="configureServicesComplete";		
+		public static const CONFIGURE_SERVICES_COMPLETE:String="configureServicesComplete";
 		public static const CONFIGURATION_COMPLETE:String="configurationComplete";
 
-		public function ApplicationConfigEvent(type:String,  bubbles:Boolean=false, cancelable:Boolean=false)
+		public function ApplicationConfigEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 		}

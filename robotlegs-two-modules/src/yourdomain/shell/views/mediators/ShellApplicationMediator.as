@@ -5,7 +5,11 @@ package yourdomain.shell.views.mediators
 	import robotlegs.bender.bundles.mvcs.Mediator;
 
 	import yourdomain.common.controllers.events.ApplicationInfoEvent;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ShellApplicationMediator extends Mediator
 	{
 		[Inject]
@@ -29,17 +33,17 @@ package yourdomain.shell.views.mediators
 			addViewListener(ApplicationInfoEvent.LOGGED_OUT, onLoggedOut, ApplicationInfoEvent);
 		}
 
-		/*============================================================================*/
-		/* Logged In                                                     				*/
-		/*============================================================================*/
+		//============================================================================
+		// Logged In
+		//============================================================================
 		private function onLoggedIn(event:ApplicationInfoEvent):void
 		{
 			view.onLoggedIn(event.message);
 		}
 
-		/*============================================================================*/
-		/* Logged Out                                                     				*/
-		/*============================================================================*/
+		//============================================================================
+		// Logged Out
+		//============================================================================
 		private function onLoggedOut(event:ApplicationInfoEvent):void
 		{
 			localDispatcher.dispatchEvent(event); //StartView will change states

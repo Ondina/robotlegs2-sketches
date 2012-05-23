@@ -16,6 +16,10 @@ package  yourdomain.modules.chatModule.context
 	import yourdomain.modules.chatModule.views.mediators.ChatMediator;
 
 	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ChatConfig
 	{
 		private var injector:Injector;
@@ -29,7 +33,7 @@ package  yourdomain.modules.chatModule.context
 		public function ChatConfig(contextView:DisplayObjectContainer, customDispatcher:String=null):void
 		{
 			trace("[chat start==============================================================>");
-			trace("1. ChatConfig.MatryoshkaDollConfig(contextView) customDispatcher "+customDispatcher);
+			trace("1. ChatConfig.(contextView) customDispatcher "+customDispatcher);
 			_childContextView=contextView;
 			_customDispatcher=customDispatcher;
 			cofigureRLContext();

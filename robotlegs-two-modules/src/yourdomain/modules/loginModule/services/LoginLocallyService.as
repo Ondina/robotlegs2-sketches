@@ -3,12 +3,18 @@ package yourdomain.modules.loginModule.services
 	import com.probertson.data.SQLRunner;
 	
 	import flash.data.SQLResult;
+	import flash.errors.SQLError;
 	import flash.events.IEventDispatcher;
+	import flash.events.SQLErrorEvent;
 	
 	import yourdomain.common.controllers.events.AlertEvent;
 	import yourdomain.common.controllers.events.ApplicationInfoEvent;
 	import yourdomain.modules.loginModule.models.LoginVO;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class LoginLocallyService implements ILoginLocallyService
 	{
 		[Inject(name="global")]
@@ -17,15 +23,13 @@ package yourdomain.modules.loginModule.services
 		[Inject]
 		public var sqlRunner:SQLRunner;
 
-		public function accessResources(loginModel:LoginVO):void
+		public function accessResources(loginVO:LoginVO):void
 		{
-			trace("LoginLocallyService.accessResources() " + loginModel.user_name + " " + loginModel.user_password);
-			sqlRunner.execute(LOAD_USER_SQL, {user_name: loginModel.user_name, user_password: loginModel.user_password}, onLoginResult, LoginVO);
+			sqlRunner.execute(LOAD_USER_SQL, {user_name: loginVO.user_name, user_password: loginVO.user_password}, onLoginResult, LoginVO);
 		}
 
 		private function onLoginResult(result:SQLResult):void
 		{
-			trace("LoginLocallyService.onLoginResult(result)");
 			var faultMessage:String;
 			if (result.data != null && result.data.length > 0)
 			{
@@ -39,11 +43,11 @@ package yourdomain.modules.loginModule.services
 			}
 		}
 
-		/*private function database_error(error:SQLError):void
+		private function database_error(error:SQLError):void
 		{
 			trace("SQLContactService.database_error(error)");
-			defaultDispatcher.dispatchEvent(new SQLErrorEvent(SQLErrorEvent.ERROR, false, false, error));
-		}*/
+			//defaultDispatcher.dispatchEvent(new SQLErrorEvent(SQLErrorEvent.ERROR, false, false, error));
+		}
 		
 		private function cleanUp():void
 		{

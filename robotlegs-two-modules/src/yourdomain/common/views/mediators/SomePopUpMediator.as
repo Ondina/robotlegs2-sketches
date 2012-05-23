@@ -5,7 +5,11 @@ package yourdomain.common.views.mediators
 	
 	import yourdomain.common.controllers.events.SomePopUpEvent;
 	import yourdomain.common.views.components.SomePopUpView;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class SomePopUpMediator extends Mediator
 	{
 		[Inject]

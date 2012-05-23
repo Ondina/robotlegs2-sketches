@@ -2,7 +2,11 @@ package yourdomain.common.controllers.events
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class SomePopUpEvent extends Event
 	{
 		public static const OPEN_POPUP:String="openPopupContainer";

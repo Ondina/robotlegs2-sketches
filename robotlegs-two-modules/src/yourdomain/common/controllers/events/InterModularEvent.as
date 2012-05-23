@@ -1,7 +1,11 @@
 package yourdomain.common.controllers.events
 {
 	import flash.events.Event;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class InterModularEvent extends Event
 	{
 		public static const MODULE_TO_MODULE:String="moduleToModule";

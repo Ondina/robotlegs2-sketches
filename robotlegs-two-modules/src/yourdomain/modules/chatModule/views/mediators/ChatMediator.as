@@ -8,7 +8,11 @@ package yourdomain.modules.chatModule.views.mediators
 
 	import yourdomain.common.controllers.events.InterModularEvent;
 	import yourdomain.modules.chatModule.views.components.ChatView;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ChatMediator extends Mediator
 	{
 		[Inject]
@@ -36,7 +40,10 @@ package yourdomain.modules.chatModule.views.mediators
 			addViewListener(InterModularEvent.MODULE_TO_SHELL, defaultDispatcher.dispatchEvent, InterModularEvent);
 			eventMap.mapListener(defaultDispatcher, InterModularEvent.SHELL_TO_MODULE, onShellToModuleMessage, InterModularEvent);
 		}
-
+		
+		//============================================================================
+		// chosen dispatcher for inter-modular communication
+		//============================================================================
 		private function setInterModularDispatcher():void
 		{
 			customDispatcher=injector.getInstance(IEventDispatcher, view.customDispatcher);

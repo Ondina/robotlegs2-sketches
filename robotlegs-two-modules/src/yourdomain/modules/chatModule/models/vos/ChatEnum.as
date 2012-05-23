@@ -3,12 +3,16 @@ package yourdomain.modules.chatModule.models.vos
 	import mx.collections.ArrayCollection;
 
 	import yourdomain.common.models.enums.Enum;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class ChatEnum extends Enum
 	{
-		public static const GLOBAL_CHANNEL:ChatEnum=new ChatEnum(0, "global", "#ff0000", "Choose a Channel");
-		public static const CHANNEL_ONE:ChatEnum=new ChatEnum(1, "channelOne", "#00ff00", "Choose a Channel");
-		public static const CHANNEL_TWO:ChatEnum=new ChatEnum(2, "channelTwo", "#0000ff", "Choose a Channel");
+		public static const GLOBAL_CHANNEL:ChatEnum=new ChatEnum(0, "global", "#bc063e", "Choose a Channel");
+		public static const CHANNEL_ONE:ChatEnum=new ChatEnum(1, "channelOne", "#0b53ad", "Choose a Channel");
+		public static const CHANNEL_TWO:ChatEnum=new ChatEnum(2, "channelTwo", "#068335", "Choose a Channel");
 
 		public function ChatEnum(ordinal:Number, name:String, color:String, description:String)
 		{

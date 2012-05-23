@@ -8,8 +8,12 @@ package yourdomain.common.controllers.commands.popups
 	
 	import yourdomain.common.controllers.events.SomePopUpEvent;
 	import yourdomain.common.views.components.SomePopUpView;
-	import yourdomain.modules.popupStuff.components.views.SomeView;
-
+	import yourdomain.modules.popupStuff.views.components.SomeView;
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class SomePopUpCommand
 	{
 		[Inject]
@@ -23,8 +27,6 @@ package yourdomain.common.controllers.commands.popups
 
 		public function execute():void
 		{
-			trace("SomePopUpCommand.execute() ");	
-			
 			var titleWindowInstance:SomePopUpView=injector.getInstance(SomePopUpView);
 			titleWindowInstance.title=event.popUpData;
 			/*titleWindowInstance.width=500;

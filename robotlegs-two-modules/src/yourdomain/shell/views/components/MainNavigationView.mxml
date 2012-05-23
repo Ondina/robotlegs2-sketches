@@ -11,6 +11,10 @@
 			
 			import yourdomain.common.controllers.events.ApplicationInfoEvent;
 			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */			
 			protected var currentIndex:int;
 			protected var oldIndex:int;			
 			protected var oldView:String="";
@@ -24,9 +28,9 @@
 			protected function onStackIndexChanged(event:IndexChangeEvent):void
 			{
 				//trace("MainNavigationView.onStackIndexChanged(event)");
-				/* trace("newIndex " + event.newIndex);
-				trace("oldIndex " + event.oldIndex);
-				trace("selectedIndex " + buttonBar.selectedIndex); */
+				//trace("newIndex " + event.newIndex);
+				//trace("oldIndex " + event.oldIndex);
+				//trace("selectedIndex " + buttonBar.selectedIndex); 
 				//clicking on the current selected tab sets event.oldIndex,event.newIndex,selectedIndex to -1, depending on the number of clicks
 				//workaround to avoid -1 indexes:
 				if (buttonBar.selectedIndex != -1)

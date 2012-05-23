@@ -13,15 +13,19 @@
 			import spark.events.TitleWindowBoundsEvent;
 
 			import yourdomain.common.controllers.events.SomePopUpEvent;
-
+			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */
 			private function onCreationComplete():void
 			{
 				addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onCloseWindow);
 			}
 
-			/*============================================================================*/
-			/* Close popup                             			*/
-			/*============================================================================*/
+			//============================================================================
+			// Close popup
+			//============================================================================
 			public function onCloseWindow(event:Event=null):void
 			{
 				removeEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onCloseWindow);
@@ -31,9 +35,9 @@
 				System.pauseForGCIfCollectionImminent(0.05);
 			}
 
-			/*============================================================================*/
-			/* Keep the window on stage                              			*/
-			/*============================================================================*/
+			//============================================================================
+			// Keep the window on stage
+			//============================================================================
 			protected function onMoveWindow(event:TitleWindowBoundsEvent):void
 			{
 				if (event.afterBounds.left < 0)

@@ -3,7 +3,11 @@ package yourdomain.modules.popupStuff.controllers.events
 	import flash.events.Event;
 	
 	import yourdomain.modules.popupStuff.models.SomeVO;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class SomeEvent extends Event
 	{
 		public static const DATA_PING:String="dataPing";

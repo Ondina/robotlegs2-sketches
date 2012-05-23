@@ -7,6 +7,10 @@ package yourdomain.shell.views.mediators
 	import yourdomain.modules.popupStuff.controllers.events.SomeEvent;
 	import yourdomain.shell.views.components.PopupsMasterView;
 	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */	
 	public class PopupsMasterMediator extends Mediator
 	{
 		[Inject]
@@ -29,14 +33,11 @@ package yourdomain.shell.views.mediators
 		
 		private function onPopupClosed(event:SomePopUpEvent):void
 		{
-			trace("PopupsMasterMediator.onPopupClosed(event) "+event.popUpData);
 			view.onPopupClosed(event.popUpData);
 		}
 		
 		private function onLoosingFocus(event:ApplicationInfoEvent):void
 		{
-			trace("PopupsMasterMediator.onLoosingFocus(event) "+event.message);
-			
 			if(event.message==view.name)
 			{
 				view.resetInputs();

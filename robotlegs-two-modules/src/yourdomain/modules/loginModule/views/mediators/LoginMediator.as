@@ -4,7 +4,11 @@ package yourdomain.modules.loginModule.views.mediators
 	
 	import yourdomain.modules.loginModule.controllers.events.LoginEvent;
 	import yourdomain.modules.loginModule.views.components.LoginView;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class LoginMediator extends Mediator
 	{
 		[Inject]

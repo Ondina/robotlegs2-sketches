@@ -3,7 +3,11 @@ package yourdomain.modules.loginModule.controllers.events
 	import flash.events.Event;
 
 	import yourdomain.modules.loginModule.models.LoginVO;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class LoginEvent extends Event
 	{
 		//public static const LOG_IN_REMOTELY:String="logInRemotely";

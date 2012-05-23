@@ -3,7 +3,11 @@ package  yourdomain.modules.loginModule.controllers.commands
 	import yourdomain.modules.loginModule.controllers.events.LoginEvent;
 	import yourdomain.modules.loginModule.services.ILoginLocallyService;
 	
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class LoginLocallyCommand
 	{
 		[Inject]

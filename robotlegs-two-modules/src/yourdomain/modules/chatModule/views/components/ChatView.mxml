@@ -4,7 +4,7 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
 		  creationComplete="onCreationComplete(event)"
 		  implements="yourdomain.common.controllers.interfaces.IModules"
-		  removedFromStage="onRemoveFromStage(event);">
+		  removedFromStage="onRemovedFromStage(event);">
 	<fx:Style source="assets/css/AirStyle.css"/>
 	<fx:Script>
 		<![CDATA[
@@ -16,15 +16,19 @@
 			import yourdomain.common.controllers.events.InterModularEvent;
 			import yourdomain.common.models.vo.ModulesVO;
 			import yourdomain.modules.chatModule.context.ChatConfig;
-
+			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */
 			protected var _modulesVO:ModulesVO;
 
 			protected var _moduleName:String;
 			protected var _customDispatcher:String;
 
-			/*============================================================================*/
-			/* IModules implementation			                                          */
-			/*============================================================================*/
+			//============================================================================
+			// IModules implementation
+			//============================================================================
 			public function get modulesVO():ModulesVO
 			{
 				return _modulesVO;
@@ -55,18 +59,23 @@
 				_moduleName=value;
 			}
 
-			/*============================================================================*/
-			/* Robotlegs 2 Context Configuration                                            */
-			/*============================================================================*/
+			//============================================================================
+			// Robotlegs 2 Context Configuration
+			//============================================================================
 			protected var context:ChatConfig;
 
 			protected function onCreationComplete(event:FlexEvent):void
 			{
+				initView();
+				//pass the customDispatcher set in ChatMasterView to the context:
+				context=new ChatConfig(this, modulesVO.customDispatcher);
+			}
+
+			protected function initView():void
+			{
 				removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
 				setModulesProperties();
 				addListeners();
-				//pass the customDispatcher set in ChatMasterView to the context:
-				context=new ChatConfig(this, modulesVO.customDispatcher);
 			}
 
 			protected function setModulesProperties():void
@@ -86,9 +95,9 @@
 				unloadButton.addEventListener(MouseEvent.CLICK, onUnloadModule);
 			}
 
-			/*============================================================================*/
-			/* Send Message to Modules
-			/*============================================================================*/
+			//============================================================================
+			// Send Message to Modules
+			//============================================================================
 			protected function onSendMessageToModule(event:MouseEvent):void
 			{
 				if (messageToSend.text == "")
@@ -100,9 +109,9 @@
 				dispatchEvent(new InterModularEvent(InterModularEvent.MODULE_TO_MODULE, modulesVO));
 			}
 
-			/*============================================================================*/
-			/* Send Message to Shell
-			/*============================================================================*/
+			//============================================================================
+			// Send Message to Shell
+			//============================================================================
 			protected function onSendMessageToShell(event:MouseEvent):void
 			{
 				if (messageToSend.text == "")
@@ -114,9 +123,9 @@
 				dispatchEvent(new InterModularEvent(InterModularEvent.MODULE_TO_SHELL, modulesVO));
 			}
 
-			/*============================================================================*/
-			/* Message from Modules
-			/*============================================================================*/
+			//============================================================================
+			// Message from Modules
+			//============================================================================
 			public function onMessageReceived(modVO:ModulesVO):void
 			{
 				var textElement:RichText=new RichText();
@@ -129,9 +138,9 @@
 				scrollingContent(index);
 			}
 
-			/*============================================================================*/
-			/* Scroll received messages content
-			/*============================================================================*/
+			//============================================================================
+			// Scroll received messages content
+			//============================================================================
 			protected function scrollingContent(index:Number):void
 			{
 				var verticalLayout:VerticalLayout=receivedMessage.layout as VerticalLayout;
@@ -145,15 +154,15 @@
 				dispatchEvent(new InterModularEvent(InterModularEvent.UNLOAD_MODULES, modulesVO));
 			}
 
-			/*============================================================================*/
-			/* Clean up
-			/*============================================================================*/
+			//============================================================================
+			// Clean up
+			//============================================================================
 			protected function onClearMessage(event:MouseEvent):void
 			{
 				event.currentTarget.text="";
 			}
 
-			protected function onRemoveFromStage(event:Event):void
+			protected function onRemovedFromStage(event:Event):void
 			{
 				removeListeners();
 			}
@@ -161,7 +170,7 @@
 			protected function removeListeners():void
 			{
 				messageToSend.removeEventListener(MouseEvent.DOUBLE_CLICK, onClearMessage);
-				removeEventListener(Event.REMOVED_FROM_STAGE, onRemoveFromStage);
+				removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 				toModulesButton.removeEventListener(MouseEvent.CLICK, onSendMessageToModule);
 				toShellButton.removeEventListener(MouseEvent.CLICK, onSendMessageToShell);
 			}

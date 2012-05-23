@@ -14,6 +14,12 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			//============================================================================
+			// compiler arguments when linking against the rl source:
+			//-keep-as3-metadata+=Inject
+			//-keep-as3-metadata+=PostConstruct
+			//============================================================================
+
 			import mx.events.FlexEvent;
 
 			import spark.components.Button;
@@ -21,10 +27,14 @@
 
 			import yourdomain.common.controllers.events.ApplicationInfoEvent;
 			import yourdomain.shell.context.ApplicationConfig;
-
-			/*============================================================================*/
-			/* StatusBar Buttons: Logout, Memory, GC                              			*/
-			/*============================================================================*/
+			
+			/**
+			 *
+			 * @author Ondina D. F.
+			 */
+			//============================================================================
+			// StatusBar Buttons: Logout, Memory, GC
+			//============================================================================
 			[SkinPart(required="true")]
 			public var logoutButton:Button;
 
@@ -37,20 +47,20 @@
 			[SkinPart(required="true")]
 			public var memoryInfo:Label;
 
-			/*============================================================================*/
-			/* Robotlegs 2 Context Configuration                                            */
-			/*============================================================================*/
+			//============================================================================
+			// Robotlegs 2 Context Configuration
+			//============================================================================
 			protected var applicationConfig:ApplicationConfig;
 
 			protected function onPreinitialize(event:FlexEvent):void
 			{
-				trace("onPreinitialize(event)");
+				trace("ShellApplication.onPreinitialize()");
 				applicationConfig=new ApplicationConfig(this);
 			}
 
-			/*============================================================================*/
-			/* Add Event Listeners                                                         */
-			/*============================================================================*/
+			//============================================================================
+			// Add Event Listeners
+			//============================================================================
 			protected function onCreationComplete():void
 			{
 				memoryButton.addEventListener(MouseEvent.CLICK, onShowMemoryUsage);
@@ -58,9 +68,9 @@
 				logoutButton.addEventListener(MouseEvent.CLICK, onLoggingOut);
 			}
 
-			/*============================================================================*/
-			/* Memory & GC                                                          		*/
-			/*============================================================================*/
+			//============================================================================
+			// Memory & GC
+			//============================================================================
 			protected function onShowMemoryUsage(event:MouseEvent=null):void
 			{
 				var totalMemory:Number=0;
@@ -74,9 +84,9 @@
 				System.gc();
 			}
 
-			/*============================================================================*/
-			/* Logged In                                                   					*/
-			/*============================================================================*/
+			//============================================================================
+			// Logged In
+			//============================================================================
 			public function onLoggedIn(message:String):void
 			{
 				status="logged in as:" + message;
@@ -84,17 +94,17 @@
 				cleanUp();
 			}
 
-			/*============================================================================*/
-			/* Logging Out                                                     				*/
-			/*============================================================================*/
+			//============================================================================
+			// Logging Out
+			//============================================================================
 			protected function onLoggingOut(event:MouseEvent):void
 			{
 				dispatchEvent(new ApplicationInfoEvent(ApplicationInfoEvent.LOGGED_OUT));
 			}
 
-			/*============================================================================*/
-			/* Logged Out                                                     				*/
-			/*============================================================================*/
+			//============================================================================
+			// Logged Out
+			//============================================================================
 			public function onLoggedOut():void
 			{
 				status="logged out";
@@ -102,9 +112,9 @@
 				System.pauseForGCIfCollectionImminent(0.10);
 			}
 
-			/*============================================================================*/
-			/* Remove Event Listeners                                                      */
-			/*============================================================================*/
+			//============================================================================
+			// Remove Event Listeners
+			//============================================================================
 			protected function cleanUp():void
 			{
 				removeEventListener(FlexEvent.PREINITIALIZE, onPreinitialize);

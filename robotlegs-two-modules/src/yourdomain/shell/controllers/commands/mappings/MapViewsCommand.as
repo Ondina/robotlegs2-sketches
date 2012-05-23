@@ -6,8 +6,8 @@ package yourdomain.shell.controllers.commands.mappings
 	import yourdomain.common.views.components.SomePopUpView;
 	import yourdomain.common.views.mediators.AlertMediator;
 	import yourdomain.common.views.mediators.SomePopUpMediator;
-	import yourdomain.modules.popupStuff.components.mediators.SomeMediator;
-	import yourdomain.modules.popupStuff.components.views.SomeView;
+	import yourdomain.modules.popupStuff.views.mediators.SomeMediator;
+	import yourdomain.modules.popupStuff.views.components.SomeView;
 	import yourdomain.shell.views.components.ChatMasterView;
 	import yourdomain.shell.views.components.MainNavigationView;
 	import yourdomain.shell.views.components.PopupsMasterView;
@@ -17,7 +17,11 @@ package yourdomain.shell.controllers.commands.mappings
 	import yourdomain.shell.views.mediators.PopupsMasterMediator;
 	import yourdomain.shell.views.mediators.ShellApplicationMediator;
 	import yourdomain.shell.views.mediators.StartMediator;
-
+	
+	/**
+	 *
+	 * @author Ondina D. F.
+	 */
 	public class MapViewsCommand
 	{
 		[Inject]
@@ -25,7 +29,6 @@ package yourdomain.shell.controllers.commands.mappings
 
 		public function execute():void
 		{
-			trace("MapViewsCommand.execute() ");
 			mediatorMap.map(AlertView).toMediator(AlertMediator);
 			mediatorMap.map(StartView).toMediator(StartMediator);
 			mediatorMap.map(ChatMasterView).toMediator(ChatMasterMediator);

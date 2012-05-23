@@ -47,7 +47,7 @@
 		<!-- The main SWF or HTML file of the application. Required. -->
 		<!-- Note: In Flash Builder, the SWF reference is set automatically. -->
 		<content>[This value will be overwritten by Flash Builder in the output app.xml]</content>
-		<title>RL 2 Modular</title>
+		<title>Robotlegs 2 Sketches: Modules and Popups</title>
 		<systemChrome>none</systemChrome>
 		<transparent>false</transparent>
 		<visible>false</visible>
