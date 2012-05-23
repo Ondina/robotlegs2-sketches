@@ -1,2 +1,8 @@
-Robotlegs two: Modules and Popups.
+Modules and Popups
+The purpose of this project is for me to get acquainted with robotlegs 2’s way of solving things.
+
+Robotlegs version2: https://github.com/robotlegs/robotlegs-framework
+I’m using the source code (latest commit to the version2 branch: commit 27ba11c328 - May 13, 2012)
+
+I like the ingenious way Shaun Smith has provided the documentation for robotlegs 2 - readme files inside each package, and I’ll do the same for the most significant classes in this application.
 Details after my holiday.
